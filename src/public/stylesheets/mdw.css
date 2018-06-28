@@ -1,0 +1,12 @@
+.header .caption .butn-bg {
+    background: RED;
+    border-color: #FFF;
+}
+
+.navbar .navbar-nav .active {
+    color: #F37020 !important;
+}
+
+.section-head h4::before {
+    background: #F37020;
+}

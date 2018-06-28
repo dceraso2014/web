@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+ 	<link rel="shortcut icon" href="/images/favicon.ico" />
+
+    <title>NEWTECH MULTIMEDIA :: Videoconferencia . Integración de sistemas de audio, video y datos . Soluciones interactivas . Infraestructura y redes . Soluciones de voz</title>
+
+    <link rel="stylesheet" href="/stylesheets/plugins/bootstrap.min.css" /> 
+ </head>
+  <body class="bg-light">
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">Listado de Novedades</h5>
+      <a class="btn btn-outline-primary" href="/addpost">Nuevo</a>
+      <a href="/logout" class="btn btn-light btn-sm">Salir</a>
+    </div>
+
+
+
+<div class="container">
+
+  <div class="row">
+    
+
+    <!-- LIST -->
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+          </tr>
+        </thead>
+         <tbody>
+         {{#each posts}}
+            <tr>
+              <td>{{ this.date }}</td>
+              <td><strong>{{ this.titulo }}</strong></td>
+              <td>
+                 <a href="/edit/{{this._id}}" class="btn btn-info">
+                  Edit
+                </a>
+                </td>
+                <td>
+                <a href="/post/del/{{this._id}}"
+                  class="btn btn-danger">
+                  borrar
+                </a>
+               </td>
+              
+            </tr>
+          {{/each}}
+         
+        </tbody>
+      </table>
+ {{current}}
+          {{pages}}
+          <div class="entry">
+            {{#if (current > 0)}}
+              <h1>{{current}}</h1>
+            {{else}}
+              <h1>Unknown Author</h1>
+            {{/if}}
+          </div>
+
+    </div>
+  </div>
+
+</div>
+
