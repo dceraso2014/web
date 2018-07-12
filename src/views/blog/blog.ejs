@@ -1,6 +1,5 @@
-
-
-		<!-- ====== Header ======  -->
+<% include ../partials/head %>
+<!-- ====== Header ======  -->
 		<section id="home" class="min-header" data-scroll-index="0">
 
 			<div class="v-middle mt-30">
@@ -8,9 +7,9 @@
 					<div class="row">
 
 						<div class="text-center col-md-12">
-							<h5>Stander Post With Image</h5>
-							<a href="#0">Home</a>
-							<a href="#0">Blog</a>
+							<h5>Novedades</h5>
+							<a href="/">Home</a>
+							<a href="/Blog">Blog</a>
 						</div>
 
 					</div>
@@ -26,119 +25,111 @@
 					
 					<div class="col-md-8">
 						<div class="posts">
-
+						
+							
+							<% for(var i = 0; i < posts.length; i++) { %>
 							<div class="post">
 								<div class="post-img">
-									<a href="#0" class="full-width">
-										<img src="/images/blog/2.jpg" alt="">
+									<a href="/blog/post/<%= posts[i]._id %>" class="full-width">
+										<img src="<%= posts[i].img1 %>" alt="">
 									</a>
 								</div>
 								<div class="content text-center">
 									<div class="post-meta">
 										<div class="post-title">
 											<h5>
-												<a href="#0">Top WordPress Themes and Plugins for Hotels, Travel, and</a>
+												<a href="/blog/post/<%= posts[i]._id %>"><%= posts[i].titulo %></a>
 											</h5>
 										</div>
 										<ul class="meta">
 											<li>
-												<a href="#0">
+												<a href="/blog/post/<%= posts[i]._id %>">
 													<i class="fa fa-calendar" aria-hidden="true"></i>
-													6 augu 2017
+													<% date = posts[i].date %>
+													<% months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']; %>
+													<% days = ['Lunes','Miecoles','Jueves','Viernes','Sabado','Domingo']; %>
+													<span id="day"><%= days[date.getDay()] %></span>
+													<span id="daynum"><%= date.getDay() %></span>
+													<span id="month"><%= months[date.getMonth()] %></span>
+													<span id="year"><%= date.getFullYear() %></span>
 												</a>
 											</li>
 										</ul>
 									</div>
 
 									<div class="post-cont">
-										<p>Lorem Ipsum is simply dummy text of the and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p><%= posts[i].desc.substring(0, 400) %></p>
 									</div>
 
-									<a href="#0" class="butn">Leer más...</a>
+									<a href="/blog/post/<%= posts[i]._id %>" class="butn">Leer más...</a>
 
 								</div>
 							</div>
+							<% } %>
 
-							<div class="post">
-								<div class="post-img">
-									<a href="#0" class="full-width">
-										<img src="/images/blog/3.jpg" alt="">
-									</a>
-								</div>
-								<div class="content text-center">
-									<div class="post-meta">
-										<div class="post-title">
-											<h5>
-												<a href="#0">Top WordPress Themes and Plugins for Hotels, Travel, and</a>
-											</h5>
-										</div>
-										<ul class="meta">
+
+							
+									<!-- pagination -->
+									<% if(pages > 0) { %> <!-- show pagination if there is pages -->
+										<div class="pagination">
+										<ul>
+										  <!-- FIRST ITEM -->
+										  <% if(current == 1) { %>
 											<li>
-												<a href="#0">
-													<i class="fa fa-calendar" aria-hidden="true"></i>
-													6 augu 2017
-												</a>
+											  <a href="#">First</a>
 											</li>
+										  <% } else { %>
+											<li>
+											  <a href="/blog/1">First</a>
+											</li>
+										  <% } %>
+								
+										  <!-- ITEMS  -->
+										  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+										  <% if(i !== 1) { %>
+											<li>
+											  <a href="#">...</a>
+											</li>
+										  <% } %>
+										  <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+											<% if(i == current) { %>
+											  <li>
+												<a href="/blog/<%= i %>">
+												  <%= i %>
+												</a>
+											  </li>
+											<% } else { %>
+											  <li>
+												<a href="/blog/<%= i %>">
+												  <%= i %>
+												</a>
+											  </li>
+											<% } %>
+											<% if (i == Number(current) + 4 && i < pages) { %>
+											   <li class="disabled">
+												 <a href="#">...</a>
+											   </li>
+											<% } %>
+										  <% } %>
+								
+										  <!-- LAST ITEM -->
+										  <% if(current == pages) { %>
+											<li class="disabled">
+											  <a href="#">
+												Last
+											  </a>
+											</li>
+										  <% } else { %>
+											<li>
+											  <a href="/blog/<%= pages %>">
+												Last
+											  </a>
+											</li>
+										  <% } %>
 										</ul>
 									</div>
-
-									<div class="post-cont">
-										<p>Lorem Ipsum is simply dummy text of the and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-
-									<a href="#0" class="butn">Leer más...</a>
-
-								</div>
-							</div>
-
-							<div class="post">
-								<div class="post-img">
-									<a href="#0" class="full-width">
-										<img src="/images/blog/1.jpg" alt="">
-									</a>
-								</div>
-								<div class="content text-center">
-									<div class="post-meta">
-										<div class="post-title">
-											<h5>
-												<a href="#0">Top WordPress Themes and Plugins for Hotels, Travel, and</a>
-											</h5>
-										</div>
-										<ul class="meta">
-											<li>
-												<a href="#0">
-													<i class="fa fa-calendar" aria-hidden="true"></i>
-													6 augu 2017
-												</a>
-											</li>
-										</ul>
-									</div>
-
-									<div class="post-cont">
-										<p>Lorem Ipsum is simply dummy text of the and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-
-									<a href="#0" class="butn">Leer más...</a>
-
-								</div>
-							</div>
-
-							<div class="pagination">
-								<ul>
-									<li>
-										<a href="#0">First</a>
-									</li>
-									<li>
-										<a href="#0">1</a>
-									</li>
-									<li>
-										<a href="#0">2</a>
-									</li>
-									<li>
-										<a href="#0">last</a>
-									</li>
-								</ul>
-							</div>
+									<% } %>
+								  
 
 						</div>
 					</div>
@@ -157,11 +148,9 @@
 									<h6>Últimas Novedades</h6>
 								</div>
 								<ul>
-									<li><a href="#0">Top WordPress Themes and Plugins for Hotels.</a></li>
-									<li><a href="#0">Master These Awesome New Skills in March.</a></li>
-									<li><a href="#0">he 20 Best Lightroom Presets You Need.</a></li>
-									<li><a href="#0">Best Design Items to Appeal to the Millennial.</a></li>
-									<li><a href="#0">Stander Post With Image.</a></li>
+										<% for(var i = 0; i < recents_posts.length; i++) { %>
+											<li><a href="/blog/<%= recents_posts[i]._id %>"><%= recents_posts[i].titulo.substring(0, 400) %></a></li>
+										<% } %>
 								</ul>
 							</div>
 
@@ -185,4 +174,5 @@
 				</div>
 			</div>
 		</section>
-		<!--====== End Blog ======-->	
+		<!--====== End Blog ======-->
+		<% include ../partials/footer %>	

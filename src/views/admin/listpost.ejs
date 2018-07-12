@@ -7,6 +7,8 @@
     <title>NEWTECH MULTIMEDIA :: Videoconferencia . Integración de sistemas de audio, video y datos . Soluciones interactivas . Infraestructura y redes . Soluciones de voz</title>
 
     <link rel="stylesheet" href="/stylesheets/plugins/bootstrap.min.css" /> 
+    
+
  </head>
   <body class="bg-light">
 
@@ -21,10 +23,11 @@
 <div class="container">
 
   <div class="row">
-    
+ 
 
     <!-- LIST -->
     <div class="col-md-12">
+        
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
@@ -35,38 +38,100 @@
           </tr>
         </thead>
          <tbody>
-         {{#each posts}}
+          <% for(var i = 0; i < posts.length; i++) { %>
             <tr>
-              <td>{{ this.date }}</td>
-              <td><strong>{{ this.titulo }}</strong></td>
               <td>
-                 <a href="/edit/{{this._id}}" class="btn btn-info">
+                          <% date = posts[i].date %>
+													<% months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']; %>
+													<% days = ['Lunes','Miecoles','Jueves','Viernes','Sabado','Domingo']; %>
+													<span id="day"><%= days[date.getDay()] %></span>
+													<span id="daynum"><%= date.getDay() %></span>
+													<span id="month"><%= months[date.getMonth()] %></span>
+													<span id="year"><%= date.getFullYear() %></span>
+              </td>
+              <td><strong><%= posts[i].titulo %></strong></td>
+              <td>
+                 <a href="/edit/<%= posts[i]._id %>" class="btn btn-info">
                   Edit
                 </a>
                 </td>
                 <td>
-                <a href="/post/del/{{this._id}}"
-                  class="btn btn-danger">
+                <a href="/del/<%= posts[i]._id %>"
+                  class="btn btn-danger" onclick="if (confirm('Esta seguro que desea borrar esta novedad??')){return true;}else{event.stopPropagation(); event.preventDefault();};">
                   borrar
                 </a>
                </td>
               
             </tr>
-          {{/each}}
+            <% } %>
          
         </tbody>
       </table>
- {{current}}
-          {{pages}}
-          <div class="entry">
-            {{#if (current > 0)}}
-              <h1>{{current}}</h1>
-            {{else}}
-              <h1>Unknown Author</h1>
-            {{/if}}
-          </div>
+         
 
-    </div>
+          <div class="row">
+            <!-- pagination -->
+            <% if(pages > 0) { %> <!-- show pagination if there is pages -->
+              <nav class="mx-auto">
+                <ul class="pagination">
+                  <!-- FIRST ITEM -->
+                  <% if(current == 1) { %>
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">First</a>
+                    </li>
+                  <% } else { %>
+                    <li class="page-item">
+                      <a class="page-link" href="/listpost/1">First</a>
+                    </li>
+                  <% } %>
+        
+                  <!-- ITEMS  -->
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if(i !== 1) { %>
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">...</a>
+                    </li>
+                  <% } %>
+                  <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if(i == current) { %>
+                      <li class="page-item active">
+                        <a class="page-link" href="/listpost<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                    <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="/listpost/<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                       <li class="page-item disabled">
+                         <a class="page-link" href="#">...</a>
+                       </li>
+                    <% } %>
+                  <% } %>
+        
+                  <!-- LAST ITEM -->
+                  <% if(current == pages) { %>
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">
+                        Last
+                      </a>
+                    </li>
+                  <% } else { %>
+                    <li class="page-item">
+                      <a class="page-link" href="/listpost/<%= pages %>">
+                        Last
+                      </a>
+                    </li>
+                  <% } %>
+                </ul>
+              </nav>
+            <% } %>
+          </div>
+        </div>
   </div>
 
 </div>

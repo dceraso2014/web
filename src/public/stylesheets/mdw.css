@@ -10,3 +10,60 @@
 .section-head h4::before {
     background: #F37020;
 }
+
+.contact .contact-form button[type='submit'] {
+    background: #F37020;
+	border: 1px solid #F37020;
+}
+
+.contact .contact-form button[type='submit']:hover span {
+    color: #F37020;
+}
+
+.blogs .posts .post .content .butn:hover {
+    background: #F37020;
+    border-color: #F37020;
+}
+
+owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #F37020;
+}
+
+.testimonails h5 {
+    color: #F37020;
+}
+
+.serv-tabs .tabs-icon .item .icon {
+     color: #F37020;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #F37020;
+}
+
+.header .caption h1 b{
+    color: #F37020;
+}
+blogs .posts .comment-form .form button[type='submit'] {
+    background: #F37020;
+    border: 1px solid #F37020;
+}
+
+.header .caption h1{
+    font-size: 60px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+#post-results-container {
+	display: none;
+	
+}
+
+.ajaxLoader{
+	display: none;
+	margin-left: 10px;
+	width: 43px;
+	height: 11px;
+}

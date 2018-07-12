@@ -23,14 +23,13 @@
       <div class="text-center mb-4">
         <img class="mb-4" src="/images/logo_newtech.png" alt="NEWTECH MULTIMEDIA">
             
-            Hola "<%= message  %>"
-            <%if (typeof message !== 'undefined') { %>
-              <div class="alert alert-danger">
-                <%= message  %>
-              </div>
-            <% }; %>
-                
-    
+          <% if (typeof message != 'undefined' && message.length > 0) { %>
+                      <% for (var i in message) { %>
+                          <div class="alert alert-info">
+                              <%= message[i] %>
+                          </div>
+                      <% } %>
+          <% } %>
       </div>
       </div>
 

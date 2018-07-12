@@ -11,7 +11,7 @@ module.exports = (app, passport) => {
 		  .sort({"date" : -1}) 
 		  .limit(3) 
 		  .exec((err, posts) => {
-			  console.log(posts);
+			  //console.log(posts);
 			  if (err) return next(err);
 			  res.render('index', {
 				posts

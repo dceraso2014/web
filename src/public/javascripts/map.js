@@ -19,6 +19,7 @@ function initMap() {
                 "stylers": [
                     {
                         "color": "#2c5a71"
+                        
                     }
                 ]
             },
@@ -27,7 +28,8 @@ function initMap() {
                 "elementType": "geometry",
                 "stylers": [
                     {
-                        "color": "#E91E63"
+                        //"color": "#E91E63"
+                        "color": "#FFFFFF"
                     },
                     {
                         "lightness": -37
@@ -40,6 +42,7 @@ function initMap() {
                 "stylers": [
                     {
                         "color": "#406d80"
+                        
                     }
                 ]
             },
@@ -49,6 +52,7 @@ function initMap() {
                 "stylers": [
                     {
                         "color": "#406d80"
+                        
                     }
                 ]
             },
@@ -60,6 +64,7 @@ function initMap() {
                     },
                     {
                         "color": "#3e606f"
+                        
                     },
                     {
                         "weight": 2
@@ -86,6 +91,7 @@ function initMap() {
                     },
                     {
                         "color": "#1a3541"
+                        
                     }
                 ]
             },
@@ -103,6 +109,7 @@ function initMap() {
                 "stylers": [
                     {
                         "color": "#2c5a71"
+                        
                     }
                 ]
             }

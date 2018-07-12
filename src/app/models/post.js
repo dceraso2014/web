@@ -5,8 +5,6 @@ const postSchema = new mongoose.Schema({
     titulo: String,
     desc: String,
     img1: String,
-    img2: String,
-    img3: String
 });
 
 

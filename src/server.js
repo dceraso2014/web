@@ -10,6 +10,41 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
+const multer = require('multer');
+
+// Set The Storage Engine
+const storage = multer.diskStorage({
+	destination: './public/images/blog/uploads',
+	filename: function(req, file, cb){
+	  cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+	}
+  });
+  
+  // Init Upload
+  const upload = multer({
+	storage: storage,
+	limits:{fileSize: 1000000},
+	fileFilter: function(req, file, cb){
+	  checkFileType(file, cb);
+	}
+  }).single('img1');
+  
+  // Check File Type
+  function checkFileType(file, cb){
+	// Allowed ext
+	const filetypes = /jpeg|jpg|png|gif/;
+	// Check ext
+	const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+	// Check mime
+	const mimetype = filetypes.test(file.mimetype);
+  
+	if(mimetype && extname){
+	  return cb(null,true);
+	} else {
+	  cb('Error: Images Only!');
+	}
+  }
+
 
 
 const { url } = require('./config/database.js');
@@ -49,6 +84,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 
 // routes
 require('./app/routes/login')(app, passport); // Rutas de login, logout

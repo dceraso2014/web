@@ -1,6 +1,9 @@
 //Incluyo el schema de post
 const Post = require('../models/post');
 const faker  = require('faker');
+const multer  = require('multer')
+
+
 
 module.exports = (app, passport) => {
   
@@ -36,7 +39,24 @@ module.exports = (app, passport) => {
 		});
     });
 */
-    app.get('/listpost/:page', isLoggedIn, (req, res, next) => {
+
+app.get('/edit/:id', isLoggedIn, (req, res, next) => {
+  //console.log(req.params.id);
+  Post
+    .findOne({"_id" : req.params.id}) // finding all documents
+    .exec((err, post) => {
+      //console.log(post);
+      // count to calculate the number of pages
+        if (err) return next(err);
+         res.render('admin/addpost', {
+          layout: 'addpost',
+          post
+        });
+     
+    });
+  });
+
+    app.get('/listpost/:page',  (req, res, next) => {
       let perPage = 9;
       let page = req.params.page || 1;
     
@@ -52,27 +72,43 @@ module.exports = (app, passport) => {
               layout: 'listpost',
               posts,
               current: page,
-              pages: Math.ceil(count / perPage)
+              pages: Math.ceil(count / perPage),
+              
             });
           });
         });
     });
+
+    app.get('/del/:id', isLoggedIn, (req, res, next) => {
      
-    app.get('/addpost', isLoggedIn, (req, res) => {
+      Post
+        .deleteOne({"_id" : req.params.id}) // finding all documents
+        .exec((err, posts) => {
+          //console.log(posts);
+          // count to calculate the number of pages
+            if (err) return next(err);
+              res.redirect('/listpost/1');
+        });
+        
+    });
+     
+    app.get('/addpost', (req, res) => {
     res.render('admin/addpost', {
 			layout: 'addpost'
 		});
     });
 
-     app.post('/savepost', isLoggedIn, (req, res) => {
-        console.log(req.body);
+    /*
+     app.post('/savepost', upload.any(),  (req, res) => {
+
+
+        console.log(upload);
         var newPost = new Post();
         //newPost.date = req.body.date;
         newPost.titulo = req.body.titulo;
         newPost.desc = req.body.desc;
         newPost.img1 = req.body.img1;
-        newPost.img2 = req.body.img2;
-        newPost.img3 = req.body.img3;
+        
 
         newPost.save( async (err) => {
             if (err) { throw err;
@@ -85,6 +121,42 @@ module.exports = (app, passport) => {
        
     });
     
+};
+*/
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    console.log(file);
+      cb(null, Date.now() + '-' + file.originalname)
+  }
+});
+
+var upload = multer({ storage: storage }).single('img1');
+
+
+app.post('/savepost', function (req, res) {
+  console.log(req);
+  upload(req, res, function (err) {
+      if (err) {
+          // An error occurred when uploading
+      }
+      res.json({
+          success: true,
+          message: 'Image uploaded!'
+      });
+
+      // Everything went fine
+  })
+});
+
+
+ 
+
+
+
 };
 
 function isLoggedIn (req, res, next) {
